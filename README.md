@@ -6,7 +6,7 @@ This project provides a mini cluster in docker with a minimal tools to test Apac
 
 1. Start the cluster (`docker-start.sh`), this will launch both containers (Hbase/Phoenix and Spark) and copy some jars between them;
 2. To run a query in Phoenix directly: 
-    * Enter in Spark container: `docker-compose exec it spark bash`
+    * Enter in Spark container: `docker-compose exec spark bash`
     * Start pyspark: `$ /usr/local/spark/bin/pyspark`
 
 3. At end, one can stop by `docker-compose stop`
@@ -25,7 +25,7 @@ upsert into patient values(1,'Veda Hopkins','avil', 'male', 634);
 select * from patient where GENDER = 'male';
 ```
 
-3. Inside Spark container, run `bash /tmp/sample/run.sh` or `/usr/local/spark/bin$ ./spark-submit /tmp/sample/test_phoenix.py` 
+3. Inside Spark container, run `bash /tmp/sample/run.sh` or `/usr/local/spark/bin/spark-submit /tmp/sample/test_phoenix.py` 
 
 
 ## Observation:
