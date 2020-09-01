@@ -1,0 +1,26 @@
+version: "2"
+services:
+
+  phoenix:
+    container_name: phoenix
+    image: boostport/hbase-phoenix-all-in-one:latest
+    volumes:
+      - ./phoenix/start-hbase-phoenix.sh:/start-hbase-phoenix.sh
+    entrypoint: 
+      - /start-hbase-phoenix.sh
+
+  
+  spark:
+    container_name: spark
+    build: ./spark
+    command: /bin/bash
+    tty: true
+    volumes:
+      - ./spark/spark-defaults.conf:/usr/local/spark/conf/spark-defaults.conf
+      - ./spark/sample:/tmp/sample
+      - ./spark/hbase-site.xml:/usr/local/spark/conf/hbase-site.xml
+      - ./spark/phoenix-spark-5.0.0-HBase-2.0.jar:/usr/local/spark/jars/phoenix-spark-5.0.0-HBase-2.0.jar
+    depends_on:
+      - phoenix
+
+
